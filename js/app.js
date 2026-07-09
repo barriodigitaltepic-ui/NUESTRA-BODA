@@ -26,7 +26,6 @@ const musicButton = document.getElementById("musicButton");
 let playing = false;
 
 enterButton.addEventListener("click", async () => {
-
     document.body.classList.remove("locked");
     intro.classList.add("hide");
 
@@ -38,27 +37,20 @@ enterButton.addEventListener("click", async () => {
         playing = false;
         musicButton.innerHTML = "♪";
     }
-
 });
 
 musicButton.addEventListener("click", async () => {
-
     if(!playing){
-
         try{
             await music.play();
             playing = true;
             musicButton.innerHTML = "Ⅱ";
         }catch(error){}
-
     }else{
-
         music.pause();
         playing = false;
         musicButton.innerHTML = "♪";
-
     }
-
 });
 
 
@@ -67,36 +59,25 @@ musicButton.addEventListener("click", async () => {
 ========================= */
 
 function updateCountdown(){
-
     const now = new Date().getTime();
     const distance = weddingDate - now;
 
     if(distance <= 0){
-
-        document.querySelector(".countdown").innerHTML =
-        "<p>Hoy celebramos el amor.</p>";
-
+        document.querySelector(".countdown").innerHTML = "<p>Hoy celebramos el amor.</p>";
         return;
-
     }
 
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
-    const minutes = Math.floor((distance / (1000 * 60)) % 60);
-    const seconds = Math.floor((distance / 1000) % 60);
-
     document.getElementById("days").textContent =
-        String(days).padStart(2,"0");
+        String(Math.floor(distance / (1000 * 60 * 60 * 24))).padStart(2,"0");
 
     document.getElementById("hours").textContent =
-        String(hours).padStart(2,"0");
+        String(Math.floor((distance / (1000 * 60 * 60)) % 24)).padStart(2,"0");
 
     document.getElementById("minutes").textContent =
-        String(minutes).padStart(2,"0");
+        String(Math.floor((distance / (1000 * 60)) % 60)).padStart(2,"0");
 
     document.getElementById("seconds").textContent =
-        String(seconds).padStart(2,"0");
-
+        String(Math.floor((distance / 1000) % 60)).padStart(2,"0");
 }
 
 setInterval(updateCountdown,1000);
@@ -110,20 +91,14 @@ updateCountdown();
 const revealElements = document.querySelectorAll(".reveal");
 
 function revealOnScroll(){
-
     revealElements.forEach(element => {
-
         const position = element.getBoundingClientRect().top;
         const screenHeight = window.innerHeight;
 
         if(position < screenHeight - 110){
-
             element.classList.add("active");
-
         }
-
     });
-
 }
 
 window.addEventListener("scroll", revealOnScroll);
@@ -144,21 +119,16 @@ const nextPhoto = document.getElementById("nextPhoto");
 let currentPhoto = 0;
 
 function openModal(index){
-
     currentPhoto = index;
     modalImg.src = galleryImages[currentPhoto];
     modal.classList.add("show");
-
 }
 
 function closeGallery(){
-
     modal.classList.remove("show");
-
 }
 
 function showNextPhoto(){
-
     currentPhoto++;
 
     if(currentPhoto >= galleryImages.length){
@@ -166,11 +136,9 @@ function showNextPhoto(){
     }
 
     modalImg.src = galleryImages[currentPhoto];
-
 }
 
 function showPrevPhoto(){
-
     currentPhoto--;
 
     if(currentPhoto < 0){
@@ -178,18 +146,13 @@ function showPrevPhoto(){
     }
 
     modalImg.src = galleryImages[currentPhoto];
-
 }
 
 document.querySelectorAll(".gallery-item").forEach(item => {
-
     item.addEventListener("click", () => {
-
         const index = Number(item.dataset.index);
         openModal(index);
-
     });
-
 });
 
 closeModal.addEventListener("click", closeGallery);
@@ -197,11 +160,9 @@ nextPhoto.addEventListener("click", showNextPhoto);
 prevPhoto.addEventListener("click", showPrevPhoto);
 
 modal.addEventListener("click", event => {
-
     if(event.target === modal){
         closeGallery();
     }
-
 });
 
 
@@ -210,7 +171,6 @@ modal.addEventListener("click", event => {
 ========================= */
 
 document.addEventListener("keydown", event => {
-
     if(!modal.classList.contains("show")){
         return;
     }
@@ -226,5 +186,4 @@ document.addEventListener("keydown", event => {
     if(event.key === "Escape"){
         closeGallery();
     }
-
 });
