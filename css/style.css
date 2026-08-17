@@ -517,4 +517,15 @@ footer h2{
         right:10px;
     }
 
+    .venue-name {
+    margin: 25px 0 15px;
+    text-align: center;
+}
+
+
+    .venue-name p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
 }
